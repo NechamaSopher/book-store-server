@@ -30,7 +30,7 @@ class StripeCtrl {
       const token =  await stripe.tokens.create({ card : data.card });      
 
       const charge = await stripe.charges.create({
-        amount: data.toPay.sum,
+        amount: data.toPay.sum * 100,
         currency: data.toPay.currency.toLowerCase(),
         description: data.email,
         source: token.id
