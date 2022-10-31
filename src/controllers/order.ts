@@ -10,10 +10,9 @@ class OrderCtrl {
 
   static async one(ctx) {
     try {
-      const user = _.get(ctx, 'state.user', {});
       const id = _.get(ctx, 'params.id');
       
-      const order = await Order.one(id, user.id);
+      const order = await Order.one({ id });
 
       ctx.body = order;
     } catch (err) {
@@ -22,17 +21,6 @@ class OrderCtrl {
     }
   }
 
-  static async list(ctx) {
-    try {
-      const user = _.get(ctx, 'state.user', {});
-      const orders = await Order.list(user.id);
-
-      ctx.body = orders;
-    } catch (err) {
-      ctx.body = err;
-      ctx.status = 500;
-    }
-  }
 
   static async create(ctx) {
     try {
@@ -64,6 +52,12 @@ class OrderCtrl {
       const id = _.get(ctx, 'params.id');
       const { card } = _.get(ctx, 'request.body', {});
 
+      const orderPurchased = await Order.one({ id, status: 'PAID'});
+
+      if (orderPurchased) {
+        throw new Error('This order was paid for');
+      }
+
       const toPay = await Order.getOrderTotal(id);
 
       const paymentData = {
@@ -91,7 +85,7 @@ class OrderCtrl {
 
   static async refund(ctx) {
     try {
-      const user = _.get(ctx, 'state.user', { id :'5b727aee-9c29-47d9-9496-7366a74e5090', email: 'nechami2212@gmail.com'});
+      const user = _.get(ctx, 'state.user');
       const { id } = _.get(ctx, 'request.params', {});
       
       // get amount to refund
@@ -134,7 +128,7 @@ const getRefundMailHtml = () => {
       <div style="margin: 8vh 0; text-align: center;">
         <font size="6rem" style="color: #6E6D7D; font-weight: 800;">,Dear customer</font> <br/>
         <br/>
-        <font size="4rem" style="color: #8D8C9B; font-weight: 600">We refunded you for your book order from</font> <br/>
+        <font size="4rem" style="color: #8D8C9B; font-weight: 600">We refunded you for your book order</font> <br/>
       </div>
     </div>
   <html>`;

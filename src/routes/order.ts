@@ -4,7 +4,6 @@ import OrderCtrl from '../controllers/order';
 
 const router = new Router({ prefix: '/order' });
 
-router.get('/', OrderCtrl.list);
 router.get('/:id', OrderCtrl.one);
 
 router.post('/', OrderCtrl.create);

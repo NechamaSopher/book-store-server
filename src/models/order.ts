@@ -21,24 +21,13 @@ class Order extends Model {
     };
   }
 
-  static async one(id, userId) {
+  static async one(condObject) {
     try {
-      const order = await Order.query().where({ id, userId }).first();
+      const order = await Order.query().where(condObject).first();
       return order.toBody();
     } catch (err) {
       console.error(err);
       throw new Error('Failed to retrieve order');
-    }
-  }
-
-  static async list(userId) {
-    try {
-      const orders = await Order.query().where({ userId, active: true });
-      
-      return orders.map(order => order.toBody());
-    } catch (err) {
-      console.error(err);
-      throw new Error('Failed to get orders');
     }
   }
 
