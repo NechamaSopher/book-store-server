@@ -28,26 +28,30 @@ This is a Bookstore Server built using Node.js and Koa framework. It includes JW
 
 ## Configuration
 
-1. Create a `.env` file in the root directory of your project and add the following configurations:
+1. Create local ProgreSQL DB.
+2. Create a `.env` file in the config file in your project and add the following configurations:
     ```env
-    PORT=3000
-    DATABASE_URL=your_database_url
-    ACCESS_TOKEN_SECRET=secret_key_verifying_token
-    REFRESH_TOKEN_SECRET=secret_key_verifying_token_refresh
-    MAIL_TRANSPORT_DETAILS: {
-      SMTP_HOST=
-      SMTP_PORT=
-      SMTP_USER=
-      SMTP_PASSWORD=
-      SMTP_FROM_NAME=
-      SMTP_FROM_ADDRESS=
-    }
-    STRIPE_SECRET_KEY=your_payment_api_key
-    SERVER_URL=your_server_key
+        const vars = {
+            PORT=3000
+            DATABASE_URL=your_database_url
+            ACCESS_TOKEN_SECRET=secret_key_verifying_token
+            REFRESH_TOKEN_SECRET=secret_key_verifying_token_refresh
+            MAIL_TRANSPORT_DETAILS: {
+              SMTP_HOST=
+              SMTP_PORT=
+              SMTP_USER=
+              SMTP_PASSWORD=
+              SMTP_FROM_NAME=
+              SMTP_FROM_ADDRESS=
+            }
+            STRIPE_SECRET_KEY=your_payment_api_key
+            SERVER_URL=your_server_key
+        }
+    
+        Object.keys(vars).forEach(key => process.env[key] = process.env[key] || vars[key]);
     ```
 
-2. Replace the placeholders with your actual configuration values
-3. Create local ProgreSQL DB.
+3. Replace the placeholders with your actual configuration values
 
 ## Usage
 ### Local server
@@ -70,4 +74,4 @@ The build artifacts will be stored in the build/ directory.
 
 ## Payment Service
 
-The payment service is integrated using a Stripe - third-party API. To process a payment, include the payment details in the order creation endpoint.
+The payment service is integrated using Stripe - third-party API. To process a payment, include the payment details in the order creation endpoint.
