@@ -61,9 +61,10 @@ The server will start on the port specified in the `.env` file (default is 3000)
 ### Build
 Build the server:
     ```sh
-      npm run build
-      ``` 
+    npm run bulid
+    ```
 The build artifacts will be stored in the build/ directory.
+
 
 ## Payment Service
 
