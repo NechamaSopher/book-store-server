@@ -53,16 +53,18 @@ This is a Bookstore Server built using Node.js and Koa framework. It includes JW
 ### Local server
 
 Start the server:
-    ```sh
+
+    
     npm start
-    ```
+    
 The server will start on the port specified in the `.env` file (default is 3000).
 
 ### Build
 Build the server:
-    ```sh
-    npm run bulid
-    ```
+
+    
+    npm run build
+    
 The build artifacts will be stored in the build/ directory.
 
 
