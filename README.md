@@ -13,7 +13,7 @@ This is a Bookstore Server built using Node.js and Koa framework. It includes JW
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/NechamaSopher/BookstoreServer.git
+    git clone https://github.com/NechamaSopher/book-store-server.git
     ```
 
 2. Navigate to the project directory:
